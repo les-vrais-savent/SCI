@@ -20,7 +20,7 @@ class Environment:
     si la position final est déjà occupé, l'agent ne bouge pas 
     """
     def move_agent(self, x_src, y_src, x_dest, y_dest):
-        if (self.grid[x_dest][y_dest] != None)
+        if self.grid[x_dest][y_dest] != None:
             return
         self.grid[x_dest][y_dest] = self.grid[x_src][y_src]
         self.grid[x_src][y_src] = None

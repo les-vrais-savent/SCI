@@ -1,6 +1,7 @@
 import random
+from model.Agent import Agent
 
-class Environment:
+class SMA:
 
     """
     Initialise un SMA avec nb_agent agent
@@ -24,10 +25,10 @@ class Environment:
                               y + random.randint(-1,1),
                               x, y)
             environement.put_agent(new_agent)
-            agents.push(new_agent)
+            self.agents.append(new_agent)
 
     def run():
-        for agent in agents:
+        for agent in self.agents:
             agent.decide()
 
 
