@@ -23,6 +23,7 @@ sma = SMA(args["nb_agent"], env, view)
 def test():
     for i in range(args["nb_round"]):
         sma.run()
+    #view.window.after(1000, test)
 
 view.window.after(1000, test)
 view.window.mainloop()

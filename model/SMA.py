@@ -32,5 +32,6 @@ class SMA:
 
     def run(self):
         for agent in self.agents:
-            self.view.update() 
             agent.decide()
+        self.view.update() 
+        time.sleep(0.1)
