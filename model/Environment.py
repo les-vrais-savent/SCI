@@ -38,3 +38,12 @@ class Environment:
             return
         self.grid[x_dest][y_dest] = self.grid[x_src][y_src]
         self.grid[x_src][y_src] = None
+
+    """
+    Affiche l'environnement 
+    """
+    def __str__(self):
+        for x in len(grid):
+            for y in len(grid[x]):
+                print(grid[x][y], end=' ')
+            print()

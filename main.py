@@ -5,6 +5,7 @@ import argparse
 # from  model.Agent import Agent
 
 
+
 ap = argparse.ArgumentParser()
 
 ap.add_argument("--size", type=int, default=10,
@@ -21,5 +22,3 @@ sma = SMA(args["nb_agent"], env)
 
 for i in range(args["nb_round"]):
     sma.run()
-
-
