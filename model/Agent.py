@@ -11,6 +11,8 @@ class Agent:
         self.posX = posX
         self.posY = posY
 
+        environment.put_agent(self)
+
     """ On laisse l'agent faire un move """
     def decide(self):
          """
