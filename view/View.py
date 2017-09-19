@@ -1,16 +1,16 @@
-# View.py
+b# View.py
 
 from tkinter import *
 
 class View:
 
-    def __init__(self, environment):
+    def __init__(self, environment, size):
         self.environment = environment
         self.window = Tk()
         self.window.title('Simulation de bille')
         
-        self.height = 500 
-        self.width = 500
+        self.height = size
+        self.width = size
         
         self.canvas = Canvas(self.window, width=self.width, height=self.height, bg='white')
         self.canvas.pack(padx=5, pady=5)

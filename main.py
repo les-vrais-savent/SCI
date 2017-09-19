@@ -13,11 +13,12 @@ ap.add_argument("--nb_agent", type=int, default=10,
                 help="(optional) number of agent")
 ap.add_argument("--nb_round", type=int, default=10,
                 help="(optional) number of round")
+ap.add_argument("--window_size", type=int, default=500)
 
 args = vars(ap.parse_args())
 
 env = Environment(args["size"])
-view = View(env)
+view = View(env, args["window_size"])
 sma = SMA(args["nb_agent"], env, view)
 
 def test():
