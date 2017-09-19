@@ -1,13 +1,15 @@
 class Environment:
     def __init__(self, size):
         self.size = size
-        self.grid = [[None] * size] * size
+        self.grid = [[None for _ in range(size)] for _ in range(size)]
+        self.agents = []
 
     """
     ajoute un agent à la position (x,y)
     """
     def put_agent(self, agent):
         self.grid[agent.posX][agent.posY] = agent
+        self.agents.append(agent)
 
     """
     renvois l'agent présent à la position (x,y)
@@ -20,7 +22,7 @@ class Environment:
     """
     def can_move(self, x, y):
         """ Si il y a un mur """
-        if (x < 0 or x > size or y < 0 or y > size):
+        if (x < 0 or x > self.size-1 or y < 0 or y > self.size-1):
             return False
 
         """ Si il y a un agent """
@@ -43,7 +45,13 @@ class Environment:
     Affiche l'environnement 
     """
     def __str__(self):
-        for x in len(grid):
-            for y in len(grid[x]):
-                print(grid[x][y], end=' ')
-            print()
+        env_str = "--------------------\n"
+        for x in range(self.size):
+            for y in range(self.size):
+                 if (self.grid[x][y] == None):
+                     env_str += " |"
+                 else:
+                     env_str += str(self.grid[x][y]) + "|"
+            env_str += '\n'
+        env_str += '--------------------\n'
+        return env_str

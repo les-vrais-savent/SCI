@@ -1,5 +1,7 @@
 import random
+import time
 from model.Agent import Agent
+from view.View import View
 
 class SMA:
 
@@ -7,10 +9,11 @@ class SMA:
     Initialise un SMA avec nb_agent agent
     Chaque agent est positioné à une position aléatoire dans l'environement
     """
-    def __init__(self, nb_agent, environment):
+    def __init__(self, nb_agent, environment, view):
         random.seed()
         self.agents = []
         self.environment = environment
+        self.view = view
 
         # générer les coord initial de l'agent
         coord = [(x,y) for x in range(environment.size)
@@ -27,7 +30,7 @@ class SMA:
             environment.put_agent(new_agent)
             self.agents.append(new_agent)
 
-    def run():
+    def run(self):
         for agent in self.agents:
+            self.view.update() 
             agent.decide()
-        print(self.environment)

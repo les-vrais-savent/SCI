@@ -4,15 +4,24 @@ from tkinter import *
 
 class View:
 
-    def __init__(self):
+    def __init__(self, environment):
+        self.environment = environment
         self.window = Tk()
         self.window.title('Simulation de bille')
-        self.
-        self.height = 1000 
-        self.width = 1000
-        self.
-        self.canvas = Canvas(window, width=width, height=height, bg='white')
+        
+        self.height = 500 
+        self.width = 500
+        
+        self.canvas = Canvas(self.window, width=self.width, height=self.height, bg='white')
         self.canvas.pack(padx=5, pady=5)
-        self.
-        self.window.mainloop()
-
+        
+    def update(self):
+        self.canvas.delete("all") 
+        
+        for agent in self.environment.agents:
+            square_size = self.height/self.environment.size
+            x0 = agent.posX * square_size
+            y0 = agent.posY * square_size
+            x1 = agent.posX * square_size + square_size
+            y1 = agent.posY * square_size + square_size
+            self.canvas.create_rectangle(x0, y0, x1, y1, fill='blue')

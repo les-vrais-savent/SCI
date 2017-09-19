@@ -11,7 +11,8 @@ class Agent:
         self.posX = posX
         self.posY = posY
 
-        environment.put_agent(self)
+    def __str__(self):
+        return str(self.id)
 
     """ On laisse l'agent faire un move """
     def decide(self):
@@ -26,7 +27,7 @@ class Agent:
          Si il peut avancer, il avance
          """
          if (can_move):
-             self.environment.move_agent(posX, posY, moveX, moveY)
+             self.environment.move_agent(self.posX, self.posY, moveX, moveY)
              self.posX = moveX
              self.posY = moveY
              return
@@ -46,7 +47,7 @@ class Agent:
          Si il peut avancer, il avance
          """
          if (can_move):
-             self.environment.move_agent(posX, posY, moveX, moveY)
+             self.environment.move_agent(self.posX, self.posY, moveX, moveY)
              self.posX = moveX
              self.posY = moveY
              return

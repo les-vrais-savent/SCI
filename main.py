@@ -1,10 +1,9 @@
-from  model.SMA import SMA
-from  model.Environment import Environment
+from model.SMA import SMA
+from model.Environment import Environment
+from view.View import View
 
 import argparse
 # from  model.Agent import Agent
-
-
 
 ap = argparse.ArgumentParser()
 
@@ -18,7 +17,12 @@ ap.add_argument("--nb_round", type=int, default=10,
 args = vars(ap.parse_args())
 
 env = Environment(args["size"])
-sma = SMA(args["nb_agent"], env)
+view = View(env)
+sma = SMA(args["nb_agent"], env, view)
 
-for i in range(args["nb_round"]):
-    sma.run()
+def test():
+    for i in range(args["nb_round"]):
+        sma.run()
+
+view.window.after(1000, test)
+view.window.mainloop()
