@@ -1,0 +1,15 @@
+{
+ "torus": "yes",
+ "gridSizeX" : 100,
+ "gridSizeY" : 100,
+ "canvasSizeX" : 500,
+ "canvasSizeY" : 500,
+ "delay" : 1,
+ "scheduling" : "random",
+ "nbTicks" : 0,
+ "grid" : 0,
+ "trace" : 0,
+ "seed" : 0,
+ "refresh" : 0.1,
+ "nbParticles" : 100
+}
