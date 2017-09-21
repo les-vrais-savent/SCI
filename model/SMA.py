@@ -9,12 +9,16 @@ class SMA:
     Initialise un SMA avec nb_agent agent
     Chaque agent est positioné à une position aléatoire dans l'environement
     """
-    def __init__(self, nb_agent, environment, view):
-        random.seed()
+    def __init__(self, nb_agent, environment, view, delay, sheduling):
+
+        self.sheduling = sheduling
+        self.delay = delay
         self.agents = []
         self.environment = environment
         self.view = view
 
+        
+        
         # générer les coord initial de l'agent
         coord = [(x,y) for x in range(environment.size)
                  for y in range (environment.size)]
@@ -31,7 +35,9 @@ class SMA:
             self.agents.append(new_agent)
 
     def run(self):
-        for agent in self.agents:
-            agent.decide()
+
+        if self.sheduling == "equitable":
+            for agent in self.agents:
+                agent.decide()
         self.view.update() 
-        time.sleep(0.1)
+        time.sleep(self.delay)
