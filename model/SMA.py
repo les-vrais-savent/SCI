@@ -16,12 +16,10 @@ class SMA:
         self.agents = []
         self.environment = environment
         self.view = view
-
-        
-        
+ 
         # générer les coord initial de l'agent
-        coord = [(x,y) for x in range(environment.size)
-                 for y in range (environment.size)]
+        coord = [(x,y) for x in range(environment.sizeX)
+                 for y in range (environment.sizeY)]
         random.shuffle(coord, random.random)
         
         for i in range(nb_agent):

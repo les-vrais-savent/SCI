@@ -19,7 +19,7 @@ class View:
         self.canvas.delete("all") 
         
         for agent in self.environment.agents:
-            square_size = self.height/self.environment.size
+            square_size = self.height/self.environment.sizeX
             x0 = agent.posX * square_size
             y0 = agent.posY * square_size
             x1 = agent.posX * square_size + square_size
