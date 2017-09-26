@@ -1,8 +1,10 @@
 import random
 import time
 
-from model.Agent import Agent
+from model.core.Agent import Agent
 from view.View import View
+
+from model.particules.Particule import Particule
 
 class SMA:
 
@@ -28,7 +30,7 @@ class SMA:
         for i in range(config['nb_particles']):
             x,y = coord.pop()
 
-            new_agent = Agent(i, environment,
+            new_agent = Particule(i, environment,
                               random.randint(-1,1),
                               random.randint(-1,1),
                               x, y, self.trace_file)
