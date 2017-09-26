@@ -24,6 +24,6 @@ class View:
             y0 = agent.posY * square_size
             x1 = agent.posX * square_size + square_size
             y1 = agent.posY * square_size + square_size
-            self.canvas.create_rectangle(x0, y0, x1, y1, fill='blue')
+            self.canvas.create_rectangle(x0, y0, x1, y1, fill=agent.color)
 
         self.canvas.update()
