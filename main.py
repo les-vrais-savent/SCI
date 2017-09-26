@@ -17,6 +17,7 @@ args = vars(ap.parse_args())
 config = json.loads(open('config.json').read())
 
 if args['courbe']:
+    config['trace'] = True
     config['grid_size_X'] = args['grid_size_X']
     config['grid_size_Y'] = args['grid_size_Y']
     config['view']=False
@@ -33,6 +34,8 @@ env = Environment(config['grid_size_X'], config['grid_size_Y'], config['torus'])
 view = View(env, config['canvas_size_X']) if config['view'] else None
 sma = SMA(config, env, view, trace_file)
 
+
+
 def test():
     for i in range(config['nb_ticks']):
         sma.run()
@@ -43,3 +46,6 @@ if view != None:
     view.window.mainloop()
 else:
     test()
+
+if trace_file != None:
+    trace_file.close()

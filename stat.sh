@@ -19,7 +19,7 @@ function launch_run(){
     echo "$size $total" >> output.plot
 }
 
-for size in $(seq 5 5 100)
+for size in $(seq 5 5 20)
 do
     echo $size "======================================="
     launch_run $size
