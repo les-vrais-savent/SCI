@@ -53,7 +53,7 @@ class Agent:
          """
          Si il peut avancer, il avance
          """
-p         if (can_move):
+         if (can_move):
              self.posX, self.posY = self.environment.move_agent(self.posX, self.posY, self.pasX, self.pasY)
              return
 
