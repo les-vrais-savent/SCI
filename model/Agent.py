@@ -34,6 +34,7 @@ class Agent:
          Sinon, il change sa direction, et regarde s'il peut bouger
          à nouveau
          """
+         self.color = 'red'
          trace_string = "agent;" + str(self.id) + ";"
          trace_string += str(self.ticks - 1) + ";" + str(self.posX)
          trace_string += ";" + str(self.posY) + ";" + str(self.pasX)
@@ -52,7 +53,7 @@ class Agent:
          """
          Si il peut avancer, il avance
          """
-         if (can_move):
+p         if (can_move):
              self.posX, self.posY = self.environment.move_agent(self.posX, self.posY, self.pasX, self.pasY)
              return
 
