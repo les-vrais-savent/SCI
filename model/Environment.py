@@ -1,7 +1,9 @@
 class Environment:
-    def __init__(self, size):
-        self.size = size
-        self.grid = [[None for _ in range(size)] for _ in range(size)]
+    def __init__(self, sizeX, sizeY, torus):
+        self.torus = torus
+        self.sizeX = sizeX
+        self.sizeY = sizeY
+        self.grid = [[None for _ in range(sizeX)] for _ in range(sizeY)]
         self.agents = []
 
     """
@@ -18,36 +20,63 @@ class Environment:
         return self.grid[x][y]
 
     """
+    Calcul de la nouvelle position selon torus
+    """
+    def compute_new_position(self, posX, posY, pasX, pasY):
+        newX = posX+pasX
+        newY = posY+pasY
+
+        if self.torus:
+            if newX < 0:
+                newX = self.sizeX-1
+            elif newX > self.sizeX-1:
+                newX = 0
+ 
+            if newY < 0:
+                newY = self.sizeY-1
+            elif newY > self.sizeY-1:
+                newY = 0
+
+        return newX, newY
+
+    """
     Vérifie la présence d'un obstacle
     """
-    def can_move(self, x, y):
+    def can_move(self, posX, posY, pasX, pasY):
         """ Si il y a un mur """
-        if (x < 0 or x > self.size-1 or y < 0 or y > self.size-1):
+        moveX, moveY = self.compute_new_position(posX, posY, pasX, pasY)
+        if (not self.torus and (moveX < 0 or moveX > self.sizeX-1 or moveY < 0 or moveY > self.sizeY-1)):
             return False
 
         """ Si il y a un agent """
-        if (self.get_agent(x, y) != None):
+        if (self.get_agent(moveX, moveY) != None):
             return False
 
         return True
  
     """
-    déplace un agent de la position (x_src,y_src) vers la position (x_dest,y_dest)
+    déplace un agent
     si la position final est déjà occupé, l'agent ne bouge pas 
     """
-    def move_agent(self, x_src, y_src, x_dest, y_dest):
-        if self.grid[x_dest][y_dest] != None:
-            return
-        self.grid[x_dest][y_dest] = self.grid[x_src][y_src]
-        self.grid[x_src][y_src] = None
+    def move_agent(self, posX, posY, pasX, pasY):
+        """ Si il ne peut pas bouger, il ne bouge pas """
+        if not self.can_move(posX, posY, pasX, pasY):
+            return posX, posY
+
+        moveX, moveY = self.compute_new_position(posX, posY, pasX, pasY)
+
+        self.grid[moveX][moveY] = self.grid[posX][posY]
+        self.grid[posX][posY] = None
+
+        return moveX, moveY
 
     """
     Affiche l'environnement 
     """
     def __str__(self):
         env_str = "--------------------\n"
-        for x in range(self.size):
-            for y in range(self.size):
+        for x in range(self.sizeX):
+            for y in range(self.sizeY):
                  if (self.grid[x][y] == None):
                      env_str += " |"
                  else:

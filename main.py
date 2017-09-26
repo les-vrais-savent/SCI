@@ -6,7 +6,6 @@ from model.SMA import SMA
 from model.Environment import Environment
 from view.View import View
 
-
 ap = argparse.ArgumentParser()
 ap.add_argument("--courbe", type=bool, default=False)
 ap.add_argument("--grid_size_X", type=int, default=100)
@@ -30,14 +29,9 @@ trace_file = open("trace.csv", "w+") if config['trace'] else None
 seed = None if config['seed'] == 0 else config['seed']
 random.seed(seed)
 
-env = Environment(config['grid_size_X'])
+env = Environment(config['grid_size_X'], config['grid_size_Y'], config['torus'])
 view = View(env, config['canvas_size_X']) if config['view'] else None
 sma = SMA(config, env, view, trace_file)
-
-
-
-
-
 
 def test():
     for i in range(config['nb_ticks']):

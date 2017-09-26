@@ -21,17 +21,13 @@ class Agent:
          Regarde si dans la direction, il a une colision
          """
          self.ticks += 1
-         moveX = self.posX+self.pasX
-         moveY = self.posY+self.pasY
-         can_move = self.environment.can_move(moveX, moveY)
+         can_move = self.environment.can_move(self.posX, self.posY, self.pasX, self.pasY)
 
          """
          Si il peut avancer, il avance
          """
          if (can_move):
-             self.environment.move_agent(self.posX, self.posY, moveX, moveY)
-             self.posX = moveX
-             self.posY = moveY
+             self.posX, self.posY = self.environment.move_agent(self.posX, self.posY, self.pasX, self.pasY)
              return
 
          """
@@ -46,11 +42,10 @@ class Agent:
          self.pasX = -self.pasX
          self.pasY = -self.pasY
 
+
          trace_string += ";" + str(self.pasX) + ";" + str(self.pasY) + "\n"
 
-         moveX = self.posX+self.pasX
-         moveY = self.posY+self.pasY 
-         can_move = self.environment.can_move(moveX, moveY)
+         can_move = self.environment.can_move(self.posX, self.posY, self.pasX, self.pasY)
 
          if self.trace_file != None:
              self.trace_file.write(trace_string)
@@ -58,9 +53,7 @@ class Agent:
          Si il peut avancer, il avance
          """
          if (can_move):
-             self.environment.move_agent(self.posX, self.posY, moveX, moveY)
-             self.posX = moveX
-             self.posY = moveY
+             self.posX, self.posY = self.environment.move_agent(self.posX, self.posY, self.pasX, self.pasY)
              return
 
          return
