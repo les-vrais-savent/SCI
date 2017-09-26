@@ -9,7 +9,7 @@
     "sheduling":"equitable",
     "nb_ticks":200,
     "grid":false,
-    "trace":false,
+    "trace":true,
     "seed":0,
     "nb_particles":10
 }

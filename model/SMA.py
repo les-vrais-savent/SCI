@@ -37,10 +37,20 @@ class SMA:
 
     def run(self):
         self.ticks += 1
-        
-        if self.sheduling == "equitable":
+
+        if self.sheduling == "sequentiel":
             for agent in self.agents:
                 agent.decide()
+        elif self.sheduling == "equitable":
+            equi = self.agents
+            random.shuffle(equi)
+            for agent in equi:
+                agent.decide()
+        elif self.sheduling == "aleatoire":
+            for _ in range(len(self.agents)):
+                nb_alea = random.randint(0, len(self.agents)-1)
+                self.agents[nb_alea].decide() 
+
         if self.view != None:
             self.view.update()
         if self.trace_file != None:
