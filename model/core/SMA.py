@@ -9,8 +9,7 @@ from model.particules.Particule import Particule
 class SMA:
 
     """
-    Initialise un SMA avec nb_agent agent
-    Chaque agent est positioné à une position aléatoire dans l'environement
+    Initialise un SMA 
     """
     def __init__(self, config, environment, view, trace_file=None):
 
@@ -21,21 +20,6 @@ class SMA:
         self.view = view
         self.trace_file = trace_file
         self.ticks = 0;
-
-        # générer les coord initial de l'agent
-        coord = [(x,y) for x in range(environment.sizeX)
-                 for y in range (environment.sizeY)]
-        random.shuffle(coord, random.random)
-        
-        for i in range(config['nb_particles']):
-            x,y = coord.pop()
-
-            new_agent = Particule(i, environment,
-                              random.randint(-1,1),
-                              random.randint(-1,1),
-                              x, y, self.trace_file)
-            environment.put_agent(new_agent)
-            self.agents.append(new_agent)
 
     def run(self):
         self.ticks += 1

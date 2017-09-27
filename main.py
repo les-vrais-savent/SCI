@@ -2,8 +2,8 @@ import random
 import json
 import argparse
 
-from model.core.SMA import SMA
 from model.core.Environment import Environment
+from model.particules.SMAParticule import SMAParticule
 from view.View import View
 
 ap = argparse.ArgumentParser()
@@ -31,7 +31,7 @@ random.seed(seed)
 
 env = Environment(config['grid_size_X'], config['grid_size_Y'], config['torus'])
 view = View(env, config['canvas_size_X']) if config['view'] else None
-sma = SMA(config, env, view, trace_file)
+sma = SMAParticule(config, env, view, trace_file)
 
 def test():
     for i in range(config['nb_ticks']):

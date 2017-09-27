@@ -5,11 +5,11 @@
     "canvas_size_X":800,
     "canvas_size_Y":800,
     "box_size": 50,
-    "delay":0.001,
+    "delay":0.01,
     "sheduling":"equitable",
     "nb_ticks":2000,
     "grid":false,
     "trace":true,
     "seed":0,
-    "nb_particles":10000
+    "nb_particles":30000
 }
