@@ -15,3 +15,6 @@ class Agent:
 
     def __str__(self):
         return str(self.id)
+
+    def decide(self):
+        return

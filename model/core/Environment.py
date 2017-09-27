@@ -1,3 +1,5 @@
+# Environment.py
+
 class Environment:
     def __init__(self, sizeX, sizeY, torus):
         self.torus = torus

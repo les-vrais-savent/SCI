@@ -7,7 +7,7 @@
     "box_size": 5,
     "delay":0.01,
     "sheduling":"equitable",
-    "nb_ticks":200,
+    "nb_ticks":2000,
     "grid":false,
     "trace":true,
     "seed":0,
