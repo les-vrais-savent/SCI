@@ -25,9 +25,8 @@ class SMAParticule(SMA):
         for i in range(config['nb_particles']):
             x,y = coord.pop()
 
-            new_agent = Particule(i, environment,
-                              random.randint(-1,1),
-                              random.randint(-1,1),
-                              x, y, self.trace_file)
+            new_agent = Particule(environment,
+                                  random.randint(-1,1),
+                                  random.randint(-1,1),
+                                  x, y, self.trace_file)
             environment.put_agent(new_agent)
-            self.agents.append(new_agent)

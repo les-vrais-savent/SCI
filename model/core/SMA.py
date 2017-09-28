@@ -15,7 +15,6 @@ class SMA:
 
         self.sheduling = config['sheduling']
         self.delay = config['delay']
-        self.agents = []
         self.environment = environment
         self.view = view
         self.trace_file = trace_file
@@ -24,18 +23,20 @@ class SMA:
     def run(self):
         self.ticks += 1
 
+        """ On reprend tous les agents """
+
         if self.sheduling == "sequentiel":
-            for agent in self.agents:
+            for agent in self.environment.agents:
                 agent.decide()
         elif self.sheduling == "equitable":
-            equi = self.agents
+            equi = self.environment.agents
             random.shuffle(equi)
             for agent in equi:
                 agent.decide()
         elif self.sheduling == "aleatoire":
             for _ in range(len(self.agents)):
                 nb_alea = random.randint(0, len(self.agents)-1)
-                self.agents[nb_alea].decide() 
+                self.environment.agents[nb_alea].decide() 
 
         if self.view != None:
             self.view.update()

@@ -1,15 +1,15 @@
 {
     "torus":false,
-    "grid_size_X":20,
-    "grid_size_Y":20,
+    "grid_size_X":100,
+    "grid_size_Y":100,
     "canvas_size_X":700,
     "canvas_size_Y":700,
     "box_size": 5,
-    "delay":0.01,
+    "delay":1,
     "sheduling":"equitable",
     "nb_ticks":2000,
     "grid":false,
     "trace":true,
     "seed":0,
-    "nb_particles":20
+    "nb_particles":200
 }

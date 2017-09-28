@@ -9,11 +9,21 @@ class Environment:
         self.agents = []
 
     """
-    ajoute un agent à la position (x,y)
+    ajoute un agent
     """
     def put_agent(self, agent):
         self.grid[agent.posX][agent.posY] = agent
         self.agents.append(agent)
+
+    """
+    Suppression d'un agent 
+    """
+    def remove_agent(self, agent):
+        self.grid[agent.posX][agent.posY] = None
+        for i in range(len(self.agents)):
+            if self.agents[i].id == agent.id:
+                self.agents.pop(i)
+                break
 
     """
     renvois l'agent présent à la position (x,y)
