@@ -1,13 +1,15 @@
 MAX_TICKS=20
 NB_RUN=10
 DATA_FILE="output.plot"
+EXE=src/main.py
+
 
 function launch_run(){
     size=$1
     total=0
     for i in $(seq 0 $NB_RUN)
     do
-	python main.py --courbe True --grid_size_X $size --grid_size_Y $size
+	python $EXE --courbe True --grid_size_X $size --grid_size_Y $size
 	nb_rebound=0
 	for i in $(seq 0 $MAX_TICKS)
 	do
