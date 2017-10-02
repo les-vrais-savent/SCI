@@ -8,7 +8,7 @@ from model.core.SMA import SMA
 
 class SMAWator(SMA):
 
-    def __init__(self, config, environment, view, trace_file=None):
+    def __init__(self, config, environment, view, configWator, trace_file=None):
 
         SMA.__init__(self, config, environment, view, trace_file)
 
@@ -19,13 +19,19 @@ class SMAWator(SMA):
  
         for i in range(config['nb_particles']):
             x,y = coord.pop()
-            environment.put_agent(Fish(environment,
-                                       random.randint(-1,1),
-                                       random.randint(-1,1),
-                                       x, y, 3, self.trace_file))
-            if i%3 == 0: 
+            if i%configWator['shark_ratio'] == 0: 
                 x,y = coord.pop()
-                environment.put_agent(Shark(environment,
-                                            random.randint(-1, 1),
-                                            random.randint(-1, 1),
-                                            x, y, 5, 10, self.trace_file)) 
+                environment.put_agent(
+                    Shark(environment,
+                          random.randint(-1, 1),
+                          random.randint(-1, 1), x, y,
+                          configWator['shark_life_time'],
+                          configWator['shark_breed_time'],
+                          self.trace_file))
+            else:
+                environment.put_agent(
+                    Fish(environment, random.randint(-1,1),
+                         random.randint(-1,1),
+                         x, y, configWator['shark_breed_time'],
+                         self.trace_file))
+

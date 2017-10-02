@@ -14,6 +14,7 @@ ap.add_argument("--grid_size_Y", type=int, default=100)
 args = vars(ap.parse_args())
 
 config = json.loads(open('../config.json').read())
+configWator = json.loads(open('../configWator.json').read())
 
 if args['courbe']:
     config['trace'] = True
@@ -31,7 +32,7 @@ random.seed(seed)
 
 env = Environment(config['grid_size_X'], config['grid_size_Y'], config['torus'])
 view = View(env, config['canvas_size_X']) if config['view'] else None
-sma = SMAWator(config, env, view, trace_file)
+sma = SMAWator(config, env, view, configWator, trace_file)
 
 def test():
     for i in range(config['nb_ticks']):

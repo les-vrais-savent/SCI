@@ -7,10 +7,10 @@ class Animal(Agent):
             self.breedTime = breedTime
             self.breedCounter = 0
             self.moved = False
+            self.baby = True
 
         def lay_egg(self, posX, posY):
             return None
-
             
         def gestation(self, posX, posY):
             self.breedCounter += 1

@@ -22,21 +22,25 @@ class SMA:
 
     def run(self):
         self.ticks += 1
-
         """ On reprend tous les agents """
 
         if self.sheduling == "sequentiel":
-            for agent in self.environment.agents:
-                agent.decide()
+            for l in self.environment.grid:
+                for agent in l:
+                    if agent != None:
+                        agent.decide()
         elif self.sheduling == "equitable":
             equi = self.environment.agents
             random.shuffle(equi)
             for agent in equi:
-                agent.decide()
+                if agent != None:
+                    agent.decide()
         elif self.sheduling == "aleatoire":
             for _ in range(len(self.agents)):
                 nb_alea = random.randint(0, len(self.agents)-1)
-                self.environment.agents[nb_alea].decide() 
+                agent = self.environment.agents[nb_alea]
+                if agent != None:
+                    agent.decide() 
 
         if self.view != None:
             self.view.update()

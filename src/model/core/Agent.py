@@ -21,10 +21,8 @@ class Agent:
     def __str__(self):
         return str(self.id)
 
-    # def neighborhood_coord(self):
-    #     return self.environment.neighborhood_coord(self.posX,
-    #                                                 self.posY)
-    
+    def getColor(self):
+        return self.color
     """
     essai de déplacer l'agent aléatoirement dans les direction haut, bas, droite, gauche. 
     S'il y arrive, renvoie True, 
@@ -35,10 +33,13 @@ class Agent:
         random.shuffle(possiblesMov)        
         
         for x, y in possiblesMov:
-            if self.environment.can_move(self.posX, self.posY, x, y):
-                self.posX, self.posY = self.environment.move_agent(self.posX, self.posY, x, y)
+            movX, movY = self.environment.compute_new_position(
+                self.posX, self.posY, x, y)
+                        
+            if self.environment.can_move2(movX, movY):
+                self.environment.move_agent2(self, movX, movY)
                 return True
-        
+
         return False
     
     def decide(self):

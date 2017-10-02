@@ -18,12 +18,14 @@ class View:
     def update(self):
         self.canvas.delete("all") 
         
-        for agent in self.environment.agents:
-            square_size = self.height/self.environment.sizeX
-            x0 = agent.posX * square_size
-            y0 = agent.posY * square_size
-            x1 = agent.posX * square_size + square_size
-            y1 = agent.posY * square_size + square_size
-            self.canvas.create_rectangle(x0, y0, x1, y1, fill=agent.color)
+        for l in self.environment.grid:
+            for agent in l:
+                if agent != None:
+                    square_size = self.height/self.environment.sizeX
+                    x0 = agent.posX * square_size
+                    y0 = agent.posY * square_size
+                    x1 = agent.posX * square_size + square_size
+                    y1 = agent.posY * square_size + square_size
+                    self.canvas.create_rectangle(x0, y0, x1, y1, fill=agent.getColor())
 
         self.canvas.update()

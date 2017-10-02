@@ -11,6 +11,13 @@ class Shark(Animal):
         self.lifeTime = lifeTime
         self.lifeCounter = 0 # Si = lifeTime, alors il meurt
         self.color = 'black'
+
+    def getColor(self):
+        if self.baby:
+            self.baby = False
+            return 'gray'
+        return self.color
+
     """
     essai de manger un poisson autour de lui
     renvoi True s'il y arrive
@@ -26,7 +33,10 @@ class Shark(Animal):
 
         """ Radar autours du requin pour détecter un poisson """
         for x, y in possiblesMov:
-            neighbour = self.environment.get_agent_direction(self.posX, self.posY, x, y)
+            movX, movY = self.environment.compute_new_position(
+                self.posX, self.posY, x, y)
+            
+            neighbour = self.environment.get_agent(movX, movY)
             if type(neighbour) == Shark or neighbour == None:
                 continue
             else:
@@ -34,21 +44,20 @@ class Shark(Animal):
                 if self.trace_file != None:
                     self.trace_file.write("Shark : " + str(self.id) + " eat fish : " + str(neighbour) + "\n") 
                 self.environment.remove_agent(neighbour)
-                neighbour2 = self.environment.get_agent_direction(self.posX, self.posY, x, y)
+                # neighbour2 = self.environment.get_agent_direction(self.posX, self.posY, x, y)
 
-                self.posX, self.posY = self.environment.move_agent(self.posX, self.posY, x, y)
-                if self.posX == lastX and self.posY == lastY:
-                    self.color = 'red'
+                self.environment.move_agent2(self, movX, movY)
                 self.lifeCounter = 0
                 self.moved = True
                 return True
         return False
 
     def lay_egg(self, posX, posY):
-        self.trace_file.write('Shark position : ' + str(self.posX) +
-                              ',' + str(self.posY) +
-                              'lay egg at position : ' + str(posX) +
-                              ',' + str(posY) + '\n')
+        if self.trace_file != None:
+            self.trace_file.write('Shark position : ' + str(self.posX) +
+                                  ',' + str(self.posY) +
+                                  'lay egg at position : ' + str(posX) +
+                                  ',' + str(posY) + '\n')
         return Shark(self.environment,random.randint(-1,1),
                      random.randint(-1,1),posX, posY, self.lifeTime, self.breedTime,
                      self.trace_file)
