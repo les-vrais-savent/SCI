@@ -5,7 +5,7 @@
     "canvas_size_X":700,
     "canvas_size_Y":700,
     "box_size": 5,
-    "delay":0.01,
+    "delay":0.00001,
     "sheduling":"sequentiel",
     "nb_ticks":2000,
     "grid":false,

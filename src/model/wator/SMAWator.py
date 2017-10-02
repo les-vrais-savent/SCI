@@ -17,21 +17,21 @@ class SMAWator(SMA):
                  for y in range (environment.sizeY)]
         random.shuffle(coord, random.random)
  
-        for i in range(config['nb_particles']):
+        for i in range(configWator['nb_shark']):
             x,y = coord.pop()
-            if i%configWator['shark_ratio'] == 0: 
-                x,y = coord.pop()
-                environment.put_agent(
-                    Shark(environment,
-                          random.randint(-1, 1),
-                          random.randint(-1, 1), x, y,
-                          configWator['shark_life_time'],
-                          configWator['shark_breed_time'],
-                          self.trace_file))
-            else:
-                environment.put_agent(
-                    Fish(environment, random.randint(-1,1),
-                         random.randint(-1,1),
-                         x, y, configWator['shark_breed_time'],
-                         self.trace_file))
+            environment.put_agent(
+                Shark(environment,
+                      random.randint(-1, 1),
+                      random.randint(-1, 1), x, y,
+                      configWator['shark_life_time'],
+                      configWator['shark_breed_time'],
+                      self.trace_file))
+
+        for i in range(configWator['nb_fish']):
+            x,y = coord.pop()
+            environment.put_agent(
+                Fish(environment, random.randint(-1,1),
+                     random.randint(-1,1),
+                     x, y, configWator['shark_breed_time'],
+                     self.trace_file))
 
