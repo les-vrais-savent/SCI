@@ -11,12 +11,13 @@ class Fish(Animal):
         self.color = 'blue'
 
     def lay_egg(self, posX, posY):
+        """
         if self.trace_file != None:
             self.trace_file.write('Fish position : ' + str(self.posX) +
                                   ',' + str(self.posY) +
                                   ' lay egg at position : ' + str(posX) +
                                   ',' + str(posY) + '\n')
-                              
+        """                   
         return Fish(self.environment, random.randint(-1,1),
                     random.randint(-1,1), posX, posY, 3,
                     self.trace_file)

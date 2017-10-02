@@ -41,8 +41,10 @@ class Shark(Animal):
                 continue
             else:
                 """ C'est un poisson, on le mange """
+                """
                 if self.trace_file != None:
                     self.trace_file.write("Shark : " + str(self.id) + " eat fish : " + str(neighbour) + "\n") 
+                """
                 self.environment.remove_agent(neighbour)
                 # neighbour2 = self.environment.get_agent_direction(self.posX, self.posY, x, y)
 
@@ -53,11 +55,12 @@ class Shark(Animal):
         return False
 
     def lay_egg(self, posX, posY):
-        if self.trace_file != None:
+        """if self.trace_file != None:
             self.trace_file.write('Shark position : ' + str(self.posX) +
                                   ',' + str(self.posY) +
                                   'lay egg at position : ' + str(posX) +
                                   ',' + str(posY) + '\n')
+        """
         return Shark(self.environment,random.randint(-1,1),
                      random.randint(-1,1),posX, posY, self.lifeTime, self.breedTime,
                      self.trace_file)

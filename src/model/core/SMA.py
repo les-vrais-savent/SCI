@@ -44,7 +44,7 @@ class SMA:
 
         if self.view != None:
             self.view.update()
-        if self.trace_file != None:
-            self.trace_file.write("ticks;" + str(self.ticks) + "\n")
+        #if self.trace_file != None:
+            #self.trace_file.write("ticks;" + str(self.ticks) + "\n")
         if self.view != None:
             time.sleep(self.delay)

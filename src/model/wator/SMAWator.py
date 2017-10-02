@@ -35,3 +35,24 @@ class SMAWator(SMA):
                      x, y, configWator['shark_breed_time'],
                      self.trace_file))
 
+    def count(self):
+        nb_fish = 0
+        nb_shark = 0
+
+        x_max = self.environment.sizeX
+        y_max = self.environment.sizeY
+
+        for x in range(x_max):
+            for y in range(y_max):
+                ag = self.environment.get_agent(x,y)
+                if type(ag) == Fish:
+                    nb_fish += 1
+                elif type(ag) == Shark:
+                    nb_shark += 1
+        return nb_fish, nb_shark
+
+    def run(self):
+        SMA.run(self)
+        if self.trace_file != None:
+            nb_fish, nb_shark = self.count()
+            self.trace_file.write(str(self.ticks) + " " + str(nb_fish) + " " + str(nb_shark) + "\n")

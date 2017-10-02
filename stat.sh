@@ -3,7 +3,6 @@ NB_RUN=10
 DATA_FILE="output.plot"
 EXE=src/main.py
 
-
 function launch_run(){
     size=$1
     total=0
