@@ -30,17 +30,28 @@ class SMA:
                     if agent != None:
                         agent.decide()
         elif self.sheduling == "equitable":
-            equi = self.environment.agents
-            random.shuffle(equi)
-            for agent in equi:
-                if agent != None:
-                    agent.decide()
+            # A corriger
+            agents = []
+            for l in self.environment.grid:
+                for agent in l:
+                    if agent != None:
+                        agents.append(agent)
+
+            random.shuffle(agents)
+            for agent in agents:
+                agent.decide()
+
         elif self.sheduling == "aleatoire":
-            for _ in range(len(self.agents)):
-                nb_alea = random.randint(0, len(self.agents)-1)
-                agent = self.environment.agents[nb_alea]
-                if agent != None:
-                    agent.decide() 
+            # A corriger
+            agents = []
+            for l in self.environment.grid:
+                for agent in l:
+                    if agent != None:
+                        agents.append(agent)
+
+            for _ in range(len(agents)):
+                nb_alea = random.randint(0, len(agents)-1)
+                agents[nb_alea].decide() 
 
         if self.view != None:
             self.view.update()
