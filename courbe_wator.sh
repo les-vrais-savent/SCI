@@ -44,7 +44,7 @@ DATA_FILE="trace.csv"
 #EOF
 
 gnuplot <<EOF
-set terminal png enhanced
+set terminal png enhanced size 1500,500
 set output 'courbe.png'
 set multiplot layout 1,2 title "Evolution de population" font ",14"
 #
@@ -54,9 +54,8 @@ set xlabel "Temps"
 set grid
 set ytics 5000
 set xtics 300
-unset key
-plot "$DATA_FILE" using 1:2 with lines, \
-     "$DATA_FILE" using 1:3 with lines
+plot "$DATA_FILE" using 1:2 with lines title "Poisson", \
+     "$DATA_FILE" using 1:3 with lines title "Requin"
 #
 set title "Evolution poisson selon requin"
 set ylabel "Requin"

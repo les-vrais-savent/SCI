@@ -1,6 +1,6 @@
 {
-    "nb_fish":2000,
-    "nb_shark":70,
+    "nb_fish":200,
+    "nb_shark":700,
     "shark_life_time":5,
     "shark_breed_time":5,
     "fish_breed_time":1

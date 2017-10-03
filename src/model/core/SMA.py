@@ -31,12 +31,12 @@ class SMA:
                 for agent in l:
                     if agent != None:
                         agents.append(agent)
+
             for ag in agents:
                 ag.decide()
 
         elif self.sheduling == "equitable":
             # A corriger
-            agents = []
             for l in self.environment.grid:
                 for agent in l:
                     if agent != None:
@@ -48,7 +48,6 @@ class SMA:
 
         elif self.sheduling == "aleatoire":
             # A corriger
-            agents = []
             for l in self.environment.grid:
                 for agent in l:
                     if agent != None:
