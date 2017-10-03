@@ -36,8 +36,8 @@ class Agent:
             movX, movY = self.environment.compute_new_position(
                 self.posX, self.posY, x, y)
                         
-            if self.environment.can_move2(movX, movY):
-                self.environment.move_agent2(self, movX, movY)
+            if self.environment.can_move(movX, movY):
+                self.environment.move_agent(self, movX, movY)
                 return True
 
         return False

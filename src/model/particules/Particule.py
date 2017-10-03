@@ -9,17 +9,20 @@ class Particule(Agent):
 
     """ On laisse l'agent faire un move """
     def decide(self):
+         move_x, move_y = self.environment.compute_new_position(self.posX,
+                          self.posY, self.pasX, self.pasY)
+
          """
          Regarde si dans la direction, il a une colision
          """
          self.ticks += 1
-         can_move = self.environment.can_move(self.posX, self.posY, self.pasX, self.pasY)
+         can_move = self.environment.can_move(move_x, move_y)
 
          """
          Si il peut avancer, il avance
          """
          if (can_move):
-             self.posX, self.posY = self.environment.move_agent(self.posX, self.posY, self.pasX, self.pasY)
+             self.environment.move_agent(self, move_x, move_y)
              return
 
          """
@@ -34,11 +37,12 @@ class Particule(Agent):
          
          self.pasX = -self.pasX
          self.pasY = -self.pasY
-
+         move_x, move_y = self.environment.compute_new_position(self.posX,
+                          self.posY, self.pasX, self.pasY)
 
          trace_string += ";" + str(self.pasX) + ";" + str(self.pasY) + "\n"
 
-         can_move = self.environment.can_move(self.posX, self.posY, self.pasX, self.pasY)
+         can_move = self.environment.can_move(move_x, move_y)
 
          if self.trace_file != None:
              self.trace_file.write(trace_string)
@@ -46,7 +50,7 @@ class Particule(Agent):
          Si il peut avancer, il avance
          """
          if (can_move):
-             self.posX, self.posY = self.environment.move_agent(self.posX, self.posY, self.pasX, self.pasY)
+             self.environment.move_agent(self, move_x, move_y)
              return
 
          return

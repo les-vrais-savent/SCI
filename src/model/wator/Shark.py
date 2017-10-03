@@ -46,9 +46,7 @@ class Shark(Animal):
                     self.trace_file.write("Shark : " + str(self.id) + " eat fish : " + str(neighbour) + "\n") 
                 """
                 self.environment.remove_agent(neighbour)
-                # neighbour2 = self.environment.get_agent_direction(self.posX, self.posY, x, y)
-
-                self.environment.move_agent2(self, movX, movY)
+                self.environment.move_agent(self, movX, movY)
                 self.lifeCounter = 0
                 self.moved = True
                 return True
