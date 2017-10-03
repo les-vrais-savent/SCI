@@ -81,8 +81,5 @@ class Shark(Animal):
             # s'il n'a pas manger il bouge
              self.moved = self.random_move()
              
-        self.gestation(lastX, lastY)
-            
-
         """ Gestation """
-        
+        self.gestation(lastX, lastY)

@@ -19,20 +19,23 @@ class SMA:
         self.view = view
         self.trace_file = trace_file
         self.ticks = 0;
+        self.agents = []
+
+    def update_agents(self):
+        self.agents = []
+        for l in self.environment.grid:
+            for agent in l:
+                if agent != None:
+                    self.agents.append(agent)
 
     def run(self):
         self.ticks += 1
         """ On reprend tous les agents """
         
-        agents = []
+        self.update_agents()
 
         if self.sheduling == "sequentiel":
-            for l in self.environment.grid:
-                for agent in l:
-                    if agent != None:
-                        agents.append(agent)
-
-            for ag in agents:
+            for ag in self.agents:
                 ag.decide()
 
         elif self.sheduling == "equitable":
