@@ -5,7 +5,9 @@ from model.core.Agent import Agent
 class Particule(Agent):
 
     def __init__(self, environment, pasX, pasY, posX, posY, trace_file=None):
-        Agent.__init__(self, environment, pasX, pasY, posX, posY, trace_file)
+        Agent.__init__(self, environment, posX, posY, trace_file)
+        self.pasX = pasX
+        self.pasY = pasY
 
     """ On laisse l'agent faire un move """
     def decide(self):

@@ -6,8 +6,8 @@ import random
 class Shark(Animal):
 
     """ Constructeur du requin """
-    def __init__(self, environment, pasX, pasY, posX, posY, lifeTime, breedTime, trace_file=None):
-        Animal.__init__(self, environment, pasX, pasY, posX, posY, breedTime, trace_file)
+    def __init__(self, environment, posX, posY, lifeTime, breedTime, trace_file=None):
+        Animal.__init__(self, environment, posX, posY, breedTime, trace_file)
         self.lifeTime = lifeTime
         self.lifeCounter = 0 # Si = lifeTime, alors il meurt
         self.color = 'black'
@@ -59,8 +59,8 @@ class Shark(Animal):
                                   'lay egg at position : ' + str(posX) +
                                   ',' + str(posY) + '\n')
         """
-        return Shark(self.environment,random.randint(-1,1),
-                     random.randint(-1,1),posX, posY, self.lifeTime, self.breedTime,
+        return Shark(self.environment, posX, posY, 
+                     self.lifeTime, self.breedTime,
                      self.trace_file)
     
     """ Décision """
@@ -69,7 +69,6 @@ class Shark(Animal):
         self.lifeCounter += 1
         lastX = self.posX
         lastY = self.posY
-
         """ Mort """
         if self.lifeCounter == self.lifeTime:
             self.environment.remove_agent(self)

@@ -23,12 +23,17 @@ class SMA:
     def run(self):
         self.ticks += 1
         """ On reprend tous les agents """
+        
+        agents = []
 
         if self.sheduling == "sequentiel":
             for l in self.environment.grid:
                 for agent in l:
                     if agent != None:
-                        agent.decide()
+                        agents.append(agent)
+            for ag in agents:
+                ag.decide()
+
         elif self.sheduling == "equitable":
             # A corriger
             agents = []

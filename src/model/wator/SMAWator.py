@@ -21,8 +21,7 @@ class SMAWator(SMA):
             x,y = coord.pop()
             environment.put_agent(
                 Shark(environment,
-                      random.randint(-1, 1),
-                      random.randint(-1, 1), x, y,
+                      x, y,
                       configWator['shark_life_time'],
                       configWator['shark_breed_time'],
                       self.trace_file))
@@ -30,9 +29,8 @@ class SMAWator(SMA):
         for i in range(configWator['nb_fish']):
             x,y = coord.pop()
             environment.put_agent(
-                Fish(environment, random.randint(-1,1),
-                     random.randint(-1,1),
-                     x, y, configWator['shark_breed_time'],
+                Fish(environment, x, y, 
+                     configWator['shark_breed_time'],
                      self.trace_file))
 
     def count(self):

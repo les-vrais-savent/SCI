@@ -6,8 +6,8 @@ import random
 class Fish(Animal):
 
     """ Constructeur du poisson """
-    def __init__(self, environment, pasX, pasY, posX, posY, breedTime, trace_file=None):
-        Animal.__init__(self, environment, pasX, pasY, posX, posY, breedTime, trace_file)
+    def __init__(self, environment, posX, posY, breedTime, trace_file=None):
+        Animal.__init__(self, environment, posX, posY, breedTime, trace_file)
         self.color = 'steel blue'
 
     def lay_egg(self, posX, posY):
@@ -18,9 +18,7 @@ class Fish(Animal):
                                   ' lay egg at position : ' + str(posX) +
                                   ',' + str(posY) + '\n')
         """                   
-        return Fish(self.environment, random.randint(-1,1),
-                    random.randint(-1,1), posX, posY, 3,
-                    self.trace_file)
+        return Fish(self.environment, posX, posY, 3, self.trace_file)
 
     def getColor(self):
         if self.baby:

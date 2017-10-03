@@ -2,8 +2,8 @@
 from model.core.Agent import Agent
 
 class Animal(Agent):
-        def __init__(self, environment, pasX, pasY, posX, posY, breedTime, trace_file=None):
-            Agent.__init__(self, environment, pasX, pasY, posX, posY, trace_file)
+        def __init__(self, environment, posX, posY, breedTime, trace_file=None):
+            Agent.__init__(self, environment, posX, posY, trace_file)
             self.breedTime = breedTime
             self.breedCounter = 0
             self.moved = False
