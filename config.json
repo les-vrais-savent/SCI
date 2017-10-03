@@ -6,7 +6,7 @@
     "canvas_size_Y":700,
     "box_size": 5,
     "delay":0.0001,
-    "sheduling":"sequentiel",
+    "sheduling":"equitable",
     "nb_ticks":2000,
     "grid":false,
     "trace":true,

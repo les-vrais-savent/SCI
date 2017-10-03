@@ -6,6 +6,7 @@ class Environment:
         self.sizeX = sizeX
         self.sizeY = sizeY
         self.grid = [[None for _ in range(sizeX)] for _ in range(sizeY)]
+        self.agents = []
         self.count = 0
         self.color = color
 
@@ -15,15 +16,26 @@ class Environment:
     def put_agent(self, agent):
         if self.grid[agent.posX][agent.posY] == None:
             self.grid[agent.posX][agent.posY] = agent
+            self.agents.append(agent)
         else:
             raise ValueError('Agent Already present at this position')
 
     """
-    Suppression d'un agent 
+    Suppression d'un agent de la grille
     """
     def remove_agent(self, agent):
         self.grid[agent.posX][agent.posY] = None
         agent.alive = False
+
+    """
+    Supprime les agents dans la liste qui ne sont pas vivants
+    """
+    def update_agents(self):
+        new_agents = []
+        for agent in self.agents:
+            if agent.alive:
+                new_agents.append(agent)
+        self.agents = new_agents
 
     """
     Calcul de la nouvelle position selon torus
