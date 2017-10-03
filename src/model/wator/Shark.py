@@ -49,6 +49,7 @@ class Shark(Animal):
                 self.environment.move_agent(self, movX, movY)
                 self.lifeCounter = 0
                 self.moved = True
+
                 return True
         return False
 
@@ -65,6 +66,8 @@ class Shark(Animal):
     
     """ Décision """
     def decide(self):
+        if not self.alive:
+            return
         self.moved = False
         self.lifeCounter += 1
         lastX = self.posX

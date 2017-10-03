@@ -8,6 +8,7 @@ class Animal(Agent):
             self.breedCounter = 0
             self.moved = False
             self.baby = True
+            self.alive = True
 
         def lay_egg(self, posX, posY):
             return None

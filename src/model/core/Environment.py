@@ -23,6 +23,7 @@ class Environment:
     """
     def remove_agent(self, agent):
         self.grid[agent.posX][agent.posY] = None
+        agent.alive = False
 
     """
     Calcul de la nouvelle position selon torus

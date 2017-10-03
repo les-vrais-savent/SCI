@@ -28,6 +28,8 @@ class Fish(Animal):
     
     """ Décision """
     def decide(self):
+        if not self.alive:
+            return
         self.moved = False
         lastX = self.posX
         lastY = self.posY
