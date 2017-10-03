@@ -12,7 +12,7 @@ class View:
         self.height = size
         self.width = size
         
-        self.canvas = Canvas(self.window, width=self.width, height=self.height, bg='white')
+        self.canvas = Canvas(self.window, width=self.width, height=self.height, bg=self.environment.color)
         self.canvas.pack(padx=5, pady=5)
         
     def update(self):

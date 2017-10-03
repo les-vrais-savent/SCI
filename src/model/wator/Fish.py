@@ -8,7 +8,7 @@ class Fish(Animal):
     """ Constructeur du poisson """
     def __init__(self, environment, pasX, pasY, posX, posY, breedTime, trace_file=None):
         Animal.__init__(self, environment, pasX, pasY, posX, posY, breedTime, trace_file)
-        self.color = 'blue'
+        self.color = 'steel blue'
 
     def lay_egg(self, posX, posY):
         """

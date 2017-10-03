@@ -1,7 +1,7 @@
 # Environment.py
 
 class Environment:
-    def __init__(self, sizeX, sizeY, torus):
+    def __init__(self, sizeX, sizeY, torus, color='white'):
         self.torus = torus
         self.sizeX = sizeX
         self.sizeY = sizeY
@@ -9,6 +9,8 @@ class Environment:
         # self.agents = [None for _ in range(sizeX * sizeY)]
         # self.agents_id = [i for i in range(0, sizeX * sizeY)]
         self.count = 0
+        self.color = color
+
     """
     ajoute un agent
     """

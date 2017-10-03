@@ -30,7 +30,7 @@ trace_file = open("../trace.csv", "w+") if config['trace'] else None
 seed = None if config['seed'] == 0 else config['seed']
 random.seed(seed)
 
-env = Environment(config['grid_size_X'], config['grid_size_Y'], config['torus'])
+env = Environment(config['grid_size_X'], config['grid_size_Y'], config['torus'], 'LightBlue')
 view = View(env, config['canvas_size_X']) if config['view'] else None
 sma = SMAWator(config, env, view, configWator, trace_file)
 
