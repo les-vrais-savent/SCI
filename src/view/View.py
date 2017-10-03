@@ -13,8 +13,8 @@ class View:
         self.width = size
         
         self.canvas = Canvas(self.window, width=self.width, height=self.height, bg=self.environment.color)
-        self.canvas.pack(padx=5, pady=5)
-        
+        self.canvas.pack()
+
     def update(self):
         self.canvas.delete("all") 
         
