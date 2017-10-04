@@ -34,20 +34,27 @@ class EnvironmentAvatar(Environment):
                 min_move = possibles_moves[i]
         return min_move
         
-    def dijkstra_recursion(self, posX, posY, val):
-        self.gridDJ[posX][posY] = (val, self.reverse)
-        possibles_moves = [(1,0), (0, 1), (-1, 0), (0, -1)]
-        for move in possibles_moves:
-            nextX = posX+move[0]
-            nextY = posY+move[1]
-            if self.is_in(nextX, nextY) and not (self.gridDJ[nextX][nextY][1] == self.reverse):
-                self.dijkstra_recursion(nextX, nextY, val+1) 
-                
     def compute_dijkstra(self):
+        possibles_moves = [(1,0), (0, 1), (-1, 0), (0, -1)]
         self.reverse = not self.reverse
         super_set = set()
         current_val = 0
         super_set.add((self.avatar.posX, self.avatar.posY))
+        while len(super_set) > 0:
+            new_set = set()
+            # On cherche toutes les positions aux alentours
+            for s in super_set:
+                for move in possibles_moves:
+                    nextX = s[0]+move[0]
+                    nextY = s[1]+move[1]
+                    if self.is_in(nextX, nextY) and not (self.gridDJ[nextX][nextY][1] == self.reverse):
+                        new_set.add((nextX, nextY))
+
+            for s in super_set:
+                self.gridDJ[s[0]][s[1]] = (current_val, self.reverse)
+            
+            super_set = new_set
+            current_val += 1
 
     def display_dijkstra_value(self):
         env_str = "--------------------\n"
