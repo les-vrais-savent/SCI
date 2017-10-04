@@ -24,14 +24,14 @@ class EnvironmentAvatar(Environment):
 
         min_move = None
         min_length = 1000000000
-        for i in range(4):
-            pasX, pasY = possibles_moves[i]
+        for pasX, pasY in possibles_moves:
             x = agent.posX + pasX
             y = agent.posY + pasY
-            (distance, _) = self.gridDJ[x][y]
-            if distance < min_length:
-                min_length = distance
-                min_move = possibles_moves[i]
+            if self.is_in(x, y):
+                (distance, _) = self.gridDJ[x][y]
+                if distance < min_length:
+                    min_length = distance
+                    min_move = (x, y)
         return min_move
         
     def compute_dijkstra(self):

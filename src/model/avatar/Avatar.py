@@ -32,7 +32,6 @@ class Avatar(Agent):
                 self.environment.move_agent(self, newX, newY)
 
         self.environment.update_target()
-        print(self.environment.display_dijkstra_value())
         return
 
     def new_move(self, move):
