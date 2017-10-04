@@ -1,3 +1,4 @@
 {
-    "nb_hunters":0
+    "nb_hunters":100,
+    "nb_walls":30
 }
