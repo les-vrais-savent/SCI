@@ -6,7 +6,7 @@ from model.avatar.Avatar import Avatar
 class EnvironmentAvatar(Environment):
     def __init__(self, sizeX, sizeY, torus, color='white'):
         Environment.__init__(self, sizeX, sizeY, torus, color)
-        self.gridDijkstra = [[None for _ in range(sizeX)] for _ in range(sizeY)]
+        self.gridDJ = [[None for _ in range(sizeX)] for _ in range(sizeY)]
         self.avatar = Avatar(self, 0, 0)
 
     def update_target(self):
@@ -18,7 +18,22 @@ class EnvironmentAvatar(Environment):
             self.avatar = agent
 
     def get_next_position(self, agent):
-        return
+        possibles_moves = [(1,0), (0, 1), (-1, 0), (0, -1)]
+
+        min_move = None
+        min_length = 1000000000
+        for i in range(4):
+            pasX, pasY = possibles_moves[i]
+            x = agent.posX + pasX
+            y = agent.posY + pasY
+            (distance, _) = self.gridDJ[x][y]
+            if distance < min_length:
+                min_length = distance
+                min_move = possibles_moves[i]
+        return min_move
+        
+        
+        return 
 
     def compute_dijkstra(self):
         possibles_moves = [(1,0), (0, 1), (-1, 0), (0, -1)]
