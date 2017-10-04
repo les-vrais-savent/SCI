@@ -4,6 +4,7 @@ import time
 from view.View import View
 from model.avatar.Avatar import Avatar
 from model.avatar.Wall import Wall 
+from model.avatar.Hunter import Hunter 
 from model.core.SMA import SMA
 from model.avatar.AvatarControls import AvatarControls
 
@@ -25,3 +26,7 @@ class SMAAvatar(SMA):
         for i in range(configAvatar['nb_walls']):
             x,y = coord.pop()
             environment.put_agent(Wall(environment, x, y, self.trace_file))
+
+        for i in range(configAvatar['nb_hunters']):
+            x,y = coord.pop()
+            environment.put_agent(Hunter(environment, x, y, self.trace_file))
