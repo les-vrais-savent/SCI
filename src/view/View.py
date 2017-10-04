@@ -17,7 +17,8 @@ class View:
 
     def update(self):
         self.canvas.delete("all") 
-        
+        #self.canvas.create_rectangle(0, 0, self.width, self.height, fill='white')
+ 
         for l in self.environment.grid:
             for agent in l:
                 if agent != None:

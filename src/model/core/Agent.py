@@ -15,6 +15,7 @@ class Agent:
         self.posY = posY
         self.trace_file = trace_file
         self.ticks = 0;
+        self.alive = True
 
     def __str__(self):
         return str(self.id)

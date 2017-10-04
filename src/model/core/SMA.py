@@ -23,7 +23,7 @@ class SMA:
     def run(self):
         self.ticks += 1
         """ On reprend tous les agents """
-        
+
         if self.sheduling == "sequentiel":
             for ag in self.environment.agents:
                 ag.decide()
