@@ -78,6 +78,15 @@ class Environment:
         return self.get_agent(posX, posY) == None
 
     """
+    Vérifie si on est dans le plateau (sans prendre en compte le torus)
+    """
+    def is_in(self, posX, posY):
+        """ Si on est hors plateau """
+        if (posX < 0 or posX > self.sizeX-1 or posY < 0 or posY > self.sizeY-1):
+            return False
+        return True
+
+    """
     déplace l'agent a la case demandé sans vérification
     """
     def move_agent(self, agent, posX, posY):
