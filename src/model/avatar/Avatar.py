@@ -30,6 +30,8 @@ class Avatar(Agent):
             newX, newY = self.environment.compute_new_position(self.posX, self.posY, x, y)
             if self.environment.can_move(newX, newY):
                 self.environment.move_agent(self, newX, newY)
+
+        self.environment.update_target()
         return
 
     def new_move(self, move):
