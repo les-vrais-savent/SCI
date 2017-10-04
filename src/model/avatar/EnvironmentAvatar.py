@@ -9,6 +9,7 @@ class EnvironmentAvatar(Environment):
         self.reverse = True
         self.gridDJ = [[(-1, self.reverse) for _ in range(sizeX)] for _ in range(sizeY)]
         self.avatar = Avatar(self, 0, 0)
+        self.compute_dijkstra()
 
     def update_target(self):
         self.compute_dijkstra()
@@ -33,30 +34,26 @@ class EnvironmentAvatar(Environment):
                 min_move = possibles_moves[i]
         return min_move
         
-        
-        return 
-
-
     def dijkstra_recursion(self, posX, posY, val):
-        self.gridDJ[self.avatar.posX][self.avatar.posY] = (val, self.reverse)
+        self.gridDJ[posX][posY] = (val, self.reverse)
         possibles_moves = [(1,0), (0, 1), (-1, 0), (0, -1)]
         for move in possibles_moves:
             nextX = posX+move[0]
             nextY = posY+move[1]
-            if self.environment.is_in(nextX, nextY):
-                if self.gridDJ[nextX][nextY][1] == self.reverse:
-                    dijkstra_recursion(nextX, nextY, val+1) 
+            if self.is_in(nextX, nextY) and not (self.gridDJ[nextX][nextY][1] == self.reverse):
+                self.dijkstra_recursion(nextX, nextY, val+1) 
                 
-
     def compute_dijkstra(self):
         self.reverse = not self.reverse
-        dijkstra_recursion(self.avatar.posX, self.avatar.posY, 0)
+        super_set = set()
+        current_val = 0
+        super_set.add((self.avatar.posX, self.avatar.posY))
 
     def display_dijkstra_value(self):
         env_str = "--------------------\n"
         for x in range(self.sizeX):
             for y in range(self.sizeY):
-                 env_str += str(self.grid[x][y][0]) + "|"
+                 env_str += str(self.gridDJ[x][y][0]) + "|"
             env_str += '\n'
         env_str += '--------------------\n'
         return env_str

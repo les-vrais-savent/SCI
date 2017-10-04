@@ -2,7 +2,7 @@ import random
 import json
 import argparse
 
-from model.core.Environment import Environment
+from model.avatar.EnvironmentAvatar import EnvironmentAvatar
 from model.avatar.SMAAvatar import SMAAvatar
 from view.View import View
 
@@ -30,7 +30,7 @@ trace_file = open("../trace.csv", "w+") if config['trace'] else None
 seed = None if config['seed'] == 0 else config['seed']
 random.seed(seed)
 
-env = Environment(config['grid_size_X'], config['grid_size_Y'], config['torus'], 'LightBlue')
+env = EnvironmentAvatar(config['grid_size_X'], config['grid_size_Y'], config['torus'], 'LightBlue')
 view = View(env, config['canvas_size_X']) if config['view'] else None
 sma = SMAAvatar(config, env, view, configAvatar, trace_file)
 
