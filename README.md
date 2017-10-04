@@ -1,10 +1,10 @@
 # A Faire
 
-- [*] gestion du torus
+- [x] gestion du torus
 - [ ] shudeling (séquentiel/ aléatoire)
-- [*] trace
-- [*] seed : possibilité de donnée une seed pour l'aléatoire (permet de reproduire une situation)
-- [*] courbes
+- [x] trace
+- [x] seed : possibilité de donnée une seed pour l'aléatoire (permet de reproduire une situation)
+- [x] courbes
 
 # Trace
 
