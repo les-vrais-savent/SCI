@@ -29,4 +29,4 @@ class SMAAvatar(SMA):
 
         for i in range(configAvatar['nb_hunters']):
             x,y = coord.pop()
-            environment.put_agent(Hunter(environment, x, y, self.trace_file))
+            environment.put_agent(Hunter(environment, x, y, configAvatar['speed_hunters']/config['delay'], self.trace_file))

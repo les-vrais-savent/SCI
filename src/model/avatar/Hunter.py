@@ -4,10 +4,10 @@ from model.core.Agent import Agent
 
 class Hunter(Agent):
 
-    def __init__(self, environment, posX, posY, trace_file=None):
+    def __init__(self, environment, posX, posY, tick, trace_file=None):
         Agent.__init__(self, environment, posX, posY, trace_file)
         self.color = 'blue'
-        self.tick = 2000
+        self.tick = tick 
         self.cpt = 1
 
     def decide(self):

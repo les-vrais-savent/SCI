@@ -4,7 +4,7 @@ from model.core.Environment import Environment
 from model.avatar.Avatar import Avatar
 
 class EnvironmentAvatar(Environment):
-    def __init__(self, sizeX, sizeY, torus, color='white'):
+    def __init__(self, sizeX, sizeY, torus, color='black'):
         Environment.__init__(self, sizeX, sizeY, torus, color)
         self.reverse = True
         self.gridDJ = [[(-1, self.reverse) for _ in range(sizeX)] for _ in range(sizeY)]
