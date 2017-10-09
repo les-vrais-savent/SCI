@@ -35,8 +35,8 @@ view = View(env, config['canvas_size_X']) if config['view'] else None
 sma = SMAAvatar(config, env, view, configAvatar, trace_file)
 
 def test():
-    while True:
-        sma.run()
+    while not sma.run():
+        continue
 
 if view != None:
     view.window.after(1000, test)

@@ -2,6 +2,7 @@
 
 from model.core.Environment import Environment
 from model.avatar.Avatar import Avatar
+import sys
 
 class EnvironmentAvatar(Environment):
     def __init__(self, sizeX, sizeY, torus, color='black'):
@@ -64,4 +65,3 @@ class EnvironmentAvatar(Environment):
             env_str += '\n'
         env_str += '--------------------\n'
         return env_str
- 

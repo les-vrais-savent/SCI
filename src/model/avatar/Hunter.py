@@ -1,6 +1,7 @@
 # Hunter.py
 
 from model.core.Agent import Agent
+from model.avatar.Avatar import Avatar
 
 class Hunter(Agent):
 
@@ -14,8 +15,11 @@ class Hunter(Agent):
         if self.cpt%self.tick == 0:
             self.cpt = 1
             x, y = self.environment.get_next_position(self)
+            dead_avatar = False
+            if isinstance(self.environment.get_agent(x, y), Avatar):
+                dead_avatar = True
             self.environment.move_agent(self, x, y)
-            return
+            return dead_avatar 
         self.cpt += 1
-        return
+        return False
 
