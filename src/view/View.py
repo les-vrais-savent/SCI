@@ -27,6 +27,9 @@ class View:
                     y0 = agent.posY * square_size
                     x1 = agent.posX * square_size + square_size
                     y1 = agent.posY * square_size + square_size
-                    self.canvas.create_oval(x0, y0, x1, y1, outline='', fill=agent.getColor())
+                    if agent.form == 'oval':
+                        self.canvas.create_oval(x0, y0, x1, y1, outline='', fill=agent.getColor())
+                    else:
+                        self.canvas.create_rectangle(x0, y0, x1, y1, outline='', fill=agent.getColor())
 
         self.canvas.update()

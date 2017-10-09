@@ -2,13 +2,15 @@
 
 from model.core.Environment import Environment
 from model.avatar.Avatar import Avatar
+from model.avatar.Wall import Wall 
+from model.avatar.Hunter import Hunter 
 import sys
 
 class EnvironmentAvatar(Environment):
     def __init__(self, sizeX, sizeY, torus, color='black'):
         Environment.__init__(self, sizeX, sizeY, torus, color)
         self.reverse = True
-        self.gridDJ = [[(-1, self.reverse) for _ in range(sizeX)] for _ in range(sizeY)]
+        self.gridDJ = [[(10000000000, self.reverse) for _ in range(sizeX)] for _ in range(sizeY)]
         self.avatar = Avatar(self, 0, 0)
         self.compute_dijkstra()
 
@@ -28,13 +30,16 @@ class EnvironmentAvatar(Environment):
         for pasX, pasY in possibles_moves:
             x = agent.posX + pasX
             y = agent.posY + pasY
-            if self.is_in(x, y):
+            if self.is_in(x, y) and self.hunter_can_move(x, y):
                 (distance, _) = self.gridDJ[x][y]
                 if distance < min_length:
                     min_length = distance
                     min_move = (x, y)
         return min_move
-        
+ 
+    def hunter_can_move(self, posX, posY):
+        return not isinstance(self.get_agent(posX, posY), Wall) and not isinstance(self.get_agent(posX, posY), Hunter) 
+
     def compute_dijkstra(self):
         possibles_moves = [(1,0), (0, 1), (-1, 0), (0, -1)]
         self.reverse = not self.reverse
@@ -48,7 +53,7 @@ class EnvironmentAvatar(Environment):
                 for move in possibles_moves:
                     nextX = s[0]+move[0]
                     nextY = s[1]+move[1]
-                    if self.is_in(nextX, nextY) and not (self.gridDJ[nextX][nextY][1] == self.reverse):
+                    if self.is_in(nextX, nextY) and not (self.gridDJ[nextX][nextY][1] == self.reverse) and not isinstance(self.grid[nextX][nextY], Wall):
                         new_set.add((nextX, nextY))
 
             for s in super_set:

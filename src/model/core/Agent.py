@@ -16,6 +16,7 @@ class Agent:
         self.trace_file = trace_file
         self.ticks = 0;
         self.alive = True
+        self.form = 'oval'
 
     def __str__(self):
         return str(self.id)

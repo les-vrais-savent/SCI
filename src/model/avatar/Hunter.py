@@ -22,4 +22,3 @@ class Hunter(Agent):
             return dead_avatar 
         self.cpt += 1
         return False
-
