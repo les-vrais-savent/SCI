@@ -10,10 +10,11 @@ class EnvironmentAvatar(Environment):
     def __init__(self, sizeX, sizeY, torus, color='black'):
         Environment.__init__(self, sizeX, sizeY, torus, color)
         self.reverse = True
+        self.reverse_hunter = False
         self.gridDJ = [[(10000000000, self.reverse) for _ in range(sizeX)] for _ in range(sizeY)]
-        self.avatar = Avatar(self, 0, 0, 0)
+        self.avatar = Avatar(self, 0, 0, 0, 0, 0)
         self.compute_dijkstra()
-
+        
     def update_target(self):
         self.compute_dijkstra()
 
@@ -22,19 +23,25 @@ class EnvironmentAvatar(Environment):
         if isinstance(agent, Avatar):
             self.avatar = agent
 
-    def get_next_position(self, agent):
+    def get_next_position(self, agent, reverse=False):
         possibles_moves = [(1,0), (0, 1), (-1, 0), (0, -1)]
 
-        min_move = None
-        min_length = 1000000000
+        def cmp(i,j):
+            if reverse:
+                return i > j
+            return i < j
+
+        move = None
+        move_length = -1 if reverse else 100000000
         for pasX, pasY in possibles_moves:
             x, y = self.compute_new_position(agent.posX, agent.posY, pasX, pasY)
             if self.is_in(x, y) and self.hunter_can_move(x, y):
                 (distance, _) = self.gridDJ[x][y]
-                if distance < min_length:
-                    min_length = distance
-                    min_move = (x, y)
-        return min_move
+                if cmp(distance,move_length):
+                    move_length = distance
+                    move = (x, y)
+        
+        return move 
  
     def hunter_can_move(self, posX, posY):
         return not isinstance(self.get_agent(posX, posY), Wall) and not isinstance(self.get_agent(posX, posY), Hunter) 

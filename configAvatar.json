@@ -1,6 +1,9 @@
 {
     "nb_hunters": 3,
-    "speed_hunters": 100,
+    "speed_hunters": 15,
     "speed_avatar": 10,
-    "nb_walls": 400
+    "nb_walls": 400,
+    "time_bonus": 100,
+    "nb_bonus" : 3,
+    "bonus_frequency" : 300
 }
