@@ -1,5 +1,5 @@
 {
     "nb_hunters": 3,
-    "speed_hunters": 0.01,
+    "speed_hunters": 0.1,
     "nb_walls": 400
 }

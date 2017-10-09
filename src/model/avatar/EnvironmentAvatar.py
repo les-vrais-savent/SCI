@@ -28,8 +28,7 @@ class EnvironmentAvatar(Environment):
         min_move = None
         min_length = 1000000000
         for pasX, pasY in possibles_moves:
-            x = agent.posX + pasX
-            y = agent.posY + pasY
+            x, y = self.compute_new_position(agent.posX, agent.posY, pasX, pasY)
             if self.is_in(x, y) and self.hunter_can_move(x, y):
                 (distance, _) = self.gridDJ[x][y]
                 if distance < min_length:
@@ -51,8 +50,7 @@ class EnvironmentAvatar(Environment):
             # On cherche toutes les positions aux alentours
             for s in super_set:
                 for move in possibles_moves:
-                    nextX = s[0]+move[0]
-                    nextY = s[1]+move[1]
+                    nextX, nextY = self.compute_new_position(s[0], s[1], move[0], move[1])
                     if self.is_in(nextX, nextY) and not (self.gridDJ[nextX][nextY][1] == self.reverse) and not isinstance(self.grid[nextX][nextY], Wall):
                         new_set.add((nextX, nextY))
 
