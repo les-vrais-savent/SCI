@@ -21,7 +21,7 @@ class SMAAvatar(SMA):
         random.shuffle(coord, random.random)
  
         x,y = coord.pop()
-        avatar = Avatar(environment, x, y, self.trace_file)
+        avatar = Avatar(environment, x, y, configAvatar['speed_avatar'], self.trace_file)
         self.cont = AvatarControls(view, avatar)
         environment.put_agent(avatar)
 
@@ -31,7 +31,7 @@ class SMAAvatar(SMA):
 
         for i in range(configAvatar['nb_hunters']):
             x,y = coord.pop()
-            environment.put_agent(Hunter(environment, x, y, configAvatar['speed_hunters']/config['delay'], self.trace_file))
+            environment.put_agent(Hunter(environment, x, y, configAvatar['speed_hunters'], self.trace_file))
 
     """
     Run qui renvoie False si la partie est terminé

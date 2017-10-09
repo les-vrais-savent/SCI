@@ -11,7 +11,7 @@ class EnvironmentAvatar(Environment):
         Environment.__init__(self, sizeX, sizeY, torus, color)
         self.reverse = True
         self.gridDJ = [[(10000000000, self.reverse) for _ in range(sizeX)] for _ in range(sizeY)]
-        self.avatar = Avatar(self, 0, 0)
+        self.avatar = Avatar(self, 0, 0, 0)
         self.compute_dijkstra()
 
     def update_target(self):

@@ -6,23 +6,30 @@ from collections import deque
 
 class Avatar(Agent):
 
-    def __init__(self, environment, posX, posY, trace_file=None):
+    def __init__(self, environment, posX, posY, tick, trace_file=None):
         Agent.__init__(self, environment, posX, posY, trace_file)
         self.color = 'red'
         self.next_controls = deque([])
+        self.move = Controls.UP
+        self.tick = tick
+        self.cpt = 1
 
     def decide(self):
-        x = 0
-        y = 0
-        if len(self.next_controls):
-            move = self.next_controls.popleft()
-            if move == Controls.RIGHT:
+        if self.cpt%self.tick == 0:
+            self.cpt = 1
+
+            if len(self.next_controls):
+                self.move = self.next_controls.popleft()
+
+            x = 0
+            y = 0
+            if self.move == Controls.RIGHT:
                 x = 1
-            elif move == Controls.LEFT:
+            elif self.move == Controls.LEFT:
                 x = -1
-            elif move == Controls.UP:
+            elif self.move == Controls.UP:
                 y = -1
-            elif move == Controls.DOWN:
+            elif self.move == Controls.DOWN:
                 y = 1
 
             newX = 0
@@ -31,7 +38,9 @@ class Avatar(Agent):
             if self.environment.can_move(newX, newY):
                 self.environment.move_agent(self, newX, newY)
 
-        self.environment.update_target()
+            self.environment.update_target()
+
+        self.cpt += 1
         return
 
     def new_move(self, move):
