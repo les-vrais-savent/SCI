@@ -9,21 +9,24 @@ import sys
 class EnvironmentAvatar(Environment):
     def __init__(self, sizeX, sizeY, torus, color='black'):
         Environment.__init__(self, sizeX, sizeY, torus, color)
-        self.reverse = True
+        self.reverse = False
         self.reverse_hunter = False
         self.gridDJ = [[(10000000000, self.reverse) for _ in range(sizeX)] for _ in range(sizeY)]
         self.avatar = Avatar(self, 0, 0, 0, 0, 0)
-        self.compute_dijkstra()
+        
+        self.compute_dijkstra(self.gridDJ, self.avatar, self.reverse)
+        
         
     def update_target(self):
-        self.compute_dijkstra()
+        self.reverse = not self.reverse
+        self.compute_dijkstra(self.gridDJ, self.avatar, self.reverse)
 
     def put_agent(self, agent):
         Environment.put_agent(self, agent)
         if isinstance(agent, Avatar):
             self.avatar = agent
 
-    def get_next_position(self, agent, reverse=False):
+    def get_next_position(self, agent, grid, reverse=False):
         possibles_moves = [(1,0), (0, 1), (-1, 0), (0, -1)]
 
         def cmp(i,j):
@@ -36,22 +39,22 @@ class EnvironmentAvatar(Environment):
         for pasX, pasY in possibles_moves:
             x, y = self.compute_new_position(agent.posX, agent.posY, pasX, pasY)
             if self.is_in(x, y) and self.hunter_can_move(x, y):
-                (distance, _) = self.gridDJ[x][y]
+                (distance, _) = grid[x][y]
                 if cmp(distance,move_length):
                     move_length = distance
                     move = (x, y)
         
-        return move 
+        return (move,move_length)
  
     def hunter_can_move(self, posX, posY):
         return not isinstance(self.get_agent(posX, posY), Wall) and not isinstance(self.get_agent(posX, posY), Hunter) 
 
-    def compute_dijkstra(self):
+    def compute_dijkstra(self, grid, target, reverse):
         possibles_moves = [(1,0), (0, 1), (-1, 0), (0, -1)]
-        self.reverse = not self.reverse
+        # self.reverse = not self.reverse
         super_set = set()
         current_val = 0
-        super_set.add((self.avatar.posX, self.avatar.posY))
+        super_set.add((target.posX, target.posY))
         while len(super_set) > 0:
             new_set = set()
             # On cherche toutes les positions aux alentours
@@ -62,8 +65,8 @@ class EnvironmentAvatar(Environment):
                         new_set.add((nextX, nextY))
 
             for s in super_set:
-                self.gridDJ[s[0]][s[1]] = (current_val, self.reverse)
-            
+                grid[s[0]][s[1]] = (current_val, self.reverse)
+
             super_set = new_set
             current_val += 1
 

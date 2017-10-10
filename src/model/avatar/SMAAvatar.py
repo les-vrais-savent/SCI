@@ -4,39 +4,26 @@ import time
 from view.View import View
 from model.avatar.Avatar import Avatar
 from model.avatar.Bonus import Bonus
-from model.avatar.Wall import Wall 
+from model.avatar.Wall import Wall
+from model.avatar.RandomHunter import RandomHunter
+from model.avatar.PatrolHunter import PatrolHunter
 from model.avatar.Hunter import Hunter 
 from model.core.SMA import SMA
 from model.avatar.AvatarControls import AvatarControls
 
 class SMAAvatar(SMA):
 
+
+
     def __init__(self, config, environment, view, configAvatar, trace_file=None, ss=False):
         SMA.__init__(self, config, environment, view, trace_file)
         self.bonus_frequency = configAvatar['bonus_frequency']
         self.cpt_bonus = configAvatar['nb_bonus']
         self.gameEnd = False
+
         if ss:
-            environment.reverse_hunter = False
-            x = environment.sizeX // 2
-            y = environment.sizeY // 2
-      
-            avatar = Avatar(environment,x , y, configAvatar['speed_avatar'], 0, self.trace_file)
-            self.cont = AvatarControls(view, avatar)
-            environment.put_agent(avatar)
-
-            for x in [0, (environment.sizeX - 1)]:
-                for y in range(environment.sizeY):
-                    environment.put_agent(Hunter(environment, x, y, 100, self.trace_file))
-
-            for y in [0, (environment.sizeX - 1)]:
-                for x in range(environment.sizeX):
-                    try:
-                        environment.put_agent(Hunter(environment, x, y, 100, self.trace_file))
-                    except ValueError:
-                        continue
+            self.ss(config, environment, view, configAvatar, trace_file)
             return
-        
         
         # générer les coord initial de l'agent
         coord = [(x,y) for x in range(environment.sizeX)
@@ -48,13 +35,26 @@ class SMAAvatar(SMA):
         self.cont = AvatarControls(view, avatar)
         environment.put_agent(avatar)
 
+        # Placement des murs
         for i in range(configAvatar['nb_walls']):
             x,y = coord.pop()
             environment.put_agent(Wall(environment, x, y, self.trace_file))
 
+        # Placement des Hunters
         for i in range(configAvatar['nb_hunters']):
             x,y = coord.pop()
             environment.put_agent(Hunter(environment, x, y, configAvatar['speed_hunters'], self.trace_file))
+
+        # Placement des RandomHunters
+        for i in range(configAvatar['nb_random_hunters']):
+            x,y = coord.pop()
+            environment.put_agent(RandomHunter(environment, x, y, configAvatar['speed_hunters'], self.trace_file))
+
+        # Placement des PatrolHunters
+        for i in range(configAvatar['nb_patrol_hunters']):
+            x,y = coord.pop()
+            environment.put_agent(PatrolHunter(environment, x, y, configAvatar['speed_hunters'], self.trace_file))
+
 
 
 
@@ -95,3 +95,27 @@ class SMAAvatar(SMA):
         self.environment.update_agents()
 
         return False
+
+
+    def ss(self, config, environment, view, configAvatar, trace_file):
+        environment.reverse_hunter = False
+        environment.torus = False
+        x = environment.sizeX // 2
+        y = environment.sizeY // 2
+      
+        avatar = Avatar(environment,x , y, configAvatar['speed_avatar'], 0, self.trace_file)
+        self.cont = AvatarControls(view, avatar)
+        environment.put_agent(avatar)
+
+            # Hunter
+        for x in [0, (environment.sizeX - 1)]:
+            for y in range(environment.sizeY):
+                environment.put_agent(Hunter(environment, x, y, 100, self.trace_file))
+
+
+        for y in [0, (environment.sizeX - 1)]:
+            for x in range(environment.sizeX):
+                try:
+                    environment.put_agent(Hunter(environment, x, y, 100, self.trace_file))
+                except ValueError:
+                    continue
