@@ -7,7 +7,7 @@ class View:
     def __init__(self, environment, size):
         self.environment = environment
         self.window = Tk()
-        self.window.title('Simulation de bille')
+        self.window.title('Simulation')
         
         self.height = size
         self.width = size
