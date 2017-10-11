@@ -18,7 +18,7 @@ class Fish(Animal):
                                   ' lay egg at position : ' + str(posX) +
                                   ',' + str(posY) + '\n')
         """                   
-        return Fish(self.environment, posX, posY, breedTime, self.trace_file)
+        return Fish(self.environment, posX, posY, self.breedTime, self.trace_file)
 
     def getColor(self):
         if self.baby:

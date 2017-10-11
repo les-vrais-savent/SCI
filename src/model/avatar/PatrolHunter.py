@@ -6,7 +6,7 @@ class PatrolHunter(Hunter):
         def __init__(self, environment, posX, posY, tick, trace_file=None):
             Hunter.__init__(self, environment, posX, posY, tick, trace_file)
             self.reverse = False
-            self.init_color = 'chartreuse'
+            self.init_color = 'yellow'
             self.gridDJ = [[(10000000000, self.reverse) for _ in range(environment.sizeX)] for _ in range(environment.sizeY)]
 
             self.goal = Agent(environment,
@@ -29,7 +29,7 @@ class PatrolHunter(Hunter):
 
                 if move != None:
                     self.simple_move(move)
-                self.init_color= 'chartreuse'
+                self.init_color= 'yellow'
                 return False
             else:
                 self.init_color= 'blue'
