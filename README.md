@@ -1,10 +1,11 @@
-# A Faire
+# Utilisation
 
-- [x] gestion du torus
-- [ ] shudeling (séquentiel/ aléatoire)
-- [x] trace
-- [x] seed : possibilité de donnée une seed pour l'aléatoire (permet de reproduire une situation)
-- [x] courbes
+Lancer la simulation :
+- particule : `./launch.sh particules`
+- proie/prédateur : `./launch.sh wator`
+- avatar : `./launch.sh avatar`
+
+
 
 # Trace
 

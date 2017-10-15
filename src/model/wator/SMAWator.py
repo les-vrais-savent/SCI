@@ -7,9 +7,22 @@ from model.wator.Fish import Fish
 from model.core.SMA import SMA
 
 class SMAWator(SMA):
+    """
+    Special SMA class which initialize environement with fish and shark agent
+    """
 
+    
     def __init__(self, config, environment, view, configWator, trace_file=None):
+        """ initialize the environment
 
+        create and put all the agent on the environement
+
+        :param config: dictionary which contains configuration parameters for the SMA class
+        :param environement: pointer to the environment
+        :param view: pointer to the view
+        :param configWator: dictionary which contains configuration parameters for the wator simulation
+        :trace_file: file to write the log information (default = None)
+        """
         SMA.__init__(self, config, environment, view, trace_file)
 
         # générer les coord initial de l'agent
@@ -34,6 +47,11 @@ class SMAWator(SMA):
                      self.trace_file))
 
     def count(self):
+        """
+        count the number of shark and fish agent on the environment
+
+        :return: a tuple (number of fish, number of shark) present on the environment
+        """
         nb_fish = 0
         nb_shark = 0
 
@@ -50,6 +68,7 @@ class SMAWator(SMA):
         return nb_fish, nb_shark
 
     def run(self):
+        """ run a turn of the simulation and write on the tracefile the number of fish and shark alive """
         SMA.run(self)
         if self.trace_file != None:
             nb_fish, nb_shark = self.count()

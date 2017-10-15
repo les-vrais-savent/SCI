@@ -13,8 +13,8 @@ ap.add_argument("--grid_size_Y", type=int, default=100)
 
 args = vars(ap.parse_args())
 
-config = json.loads(open('../config.json').read())
-configAvatar = json.loads(open('../configAvatar.json').read())
+config = json.loads(open('config.json').read())
+configAvatar = json.loads(open('configAvatar.json').read())
 
 if args['courbe']:
     config['trace'] = True
@@ -25,7 +25,7 @@ if args['courbe']:
 else:
     config['view']=True
 
-trace_file = open("../trace.csv", "w+") if config['trace'] else None
+trace_file = open("trace.csv", "w+") if config['trace'] else None
 
 seed = None if config['seed'] == 0 else config['seed']
 random.seed(seed)

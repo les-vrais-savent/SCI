@@ -7,12 +7,22 @@ from view.View import View
 from model.particules.Particule import Particule
 
 class SMA:
+    """ main class for the multi agent system
+    
+    used to manage agent and update the view
+    """
 
-    """
-    Initialise un SMA 
-    """
     def __init__(self, config, environment, view, trace_file=None):
+        """ initialize the environment
 
+        create and put all the agent on the environement
+
+        :param config: dictionary which contains configuration parameters
+        :param environement: pointer to the environment
+        :param view: pointer to the view
+        :trace_file: file to write the log information (default = None)
+        """
+        
         self.sheduling = config['sheduling']
         self.delay = config['delay']
         self.environment = environment
@@ -21,8 +31,12 @@ class SMA:
         self.ticks = 0;
 
     def run(self):
+        """ run a round of decision and update the view
+
+        agents are taken (the order depend of the sheduling mode) and make a decision. after that, the view is update
+        """
         self.ticks += 1
-        """ On reprend tous les agents """
+        # On reprend tous les agents
 
         if self.sheduling == "sequentiel":
             for ag in self.environment.agents:

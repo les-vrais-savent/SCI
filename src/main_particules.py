@@ -13,7 +13,7 @@ ap.add_argument("--grid_size_Y", type=int, default=100)
 
 args = vars(ap.parse_args())
 
-config = json.loads(open('../config.json').read())
+config = json.loads(open('config.json').read())
 
 if args['courbe']:
     config['trace'] = True
