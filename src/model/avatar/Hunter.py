@@ -11,7 +11,7 @@ class Hunter(Agent):
     """
     
     def __init__(self, environment, posX, posY, tick, trace_file=None):
-         """ Initialize the Agent
+        """ Initialize the Agent
         
         set its view representation (color, form)
   
