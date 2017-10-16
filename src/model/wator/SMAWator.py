@@ -21,7 +21,7 @@ class SMAWator(SMA):
         :param environement: pointer to the environment
         :param view: pointer to the view
         :param configWator: dictionary which contains configuration parameters for the wator simulation
-        :trace_file: file to write the log information (default = None)
+        :param trace_file: file to write the log information (default = None)
         """
         SMA.__init__(self, config, environment, view, trace_file)
 

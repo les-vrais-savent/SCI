@@ -4,7 +4,17 @@ from tkinter import *
 
 class View:
 
+    """
+    The view of a simulation
+    """
+    
     def __init__(self, environment, size):
+        """
+        initialize the view with a pointer to the environement
+
+        :param environment: pointer to the environement
+        :param size: size of the window (which is a square)
+        """
         self.environment = environment
         self.window = Tk()
         self.window.title('Simulation')
@@ -16,6 +26,7 @@ class View:
         self.canvas.pack()
 
     def update(self):
+        """ Update the view """
         self.canvas.delete("all") 
         #self.canvas.create_rectangle(0, 0, self.width, self.height, fill='white')
  

@@ -12,10 +12,22 @@ from model.core.SMA import SMA
 from model.avatar.AvatarControls import AvatarControls
 
 class SMAAvatar(SMA):
+    """
+    Special SMA class which initialize environement with Wall, different Hunter type and the Avatar
+    """
 
+    def __init__(self, config, environment, view, configAvatar, trace_file=None, trap=False):
+        """ initialize the environment
 
+        create and put all the agent on the environement
 
-    def __init__(self, config, environment, view, configAvatar, trace_file=None, ss=False):
+        :param config: dictionary which contains configuration parameters for the SMA class
+        :param environement: pointer to the environment
+        :param view: pointer to the view
+        :param configAvatar: dictionary which contains configuration parameters for the avatar simulation
+        :param trace_file: file to write the log information (default = None)
+        :param trap: if set to true, activate a special initial configuration of the environment
+        """
         SMA.__init__(self, config, environment, view, trace_file)
         self.bonus_frequency = configAvatar['bonus_frequency']
         self.cpt_bonus = configAvatar['nb_bonus']
@@ -23,8 +35,8 @@ class SMAAvatar(SMA):
         self.speed_hunter = configAvatar['speed_hunters']
         
 
-        if ss:
-            self.ss(config, environment, view, configAvatar, trace_file)
+        if trap:
+            self.trap(config, environment, view, configAvatar, trace_file)
             return
         
         # générer les coord initial de l'agent
@@ -64,7 +76,11 @@ class SMAAvatar(SMA):
     Run qui renvoie True si la partie est terminé
     """
     def run(self):
-
+        """
+        run a turn of the game and look it is finished
+        
+        :return: True if during the turn, a Hunter destroy the Avatar or the avatar took the last bonus, False otherwise
+        """
         # Placer un bonus ou un nouvel BonusHunter
         if ((self.ticks + 1) % self.bonus_frequency) == 0 and self.cpt_bonus != 0:
             coord = [(x,y) for x in range(self.environment.sizeX)
@@ -84,7 +100,7 @@ class SMAAvatar(SMA):
             return True 
 
         self.ticks += 1
-        """ On reprend tous les agents """
+        # On reprend tous les agents
 
         for ag in self.environment.agents:
             if ag.decide():
@@ -102,8 +118,8 @@ class SMAAvatar(SMA):
 
         return False
 
-
-    def ss(self, config, environment, view, configAvatar, trace_file):
+    """ a special configuration of the environment """
+    def trap(self, config, environment, view, configAvatar, trace_file):
         environment.reverse_hunter = False
         environment.torus = False
         x = environment.sizeX // 2

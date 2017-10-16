@@ -6,8 +6,26 @@ from model.avatar.Bonus import Bonus
 from collections import deque
 
 class Avatar(Agent):
+    """
+    The agent Avatar
 
+    an agent have a position in the environement, contain a pointer to the environment and a traceFile to log information. it decide to move at a frequency determined by the user. The user chose the direction where the avatar have to move.
+    """
+
+    
     def __init__(self, environment, posX, posY, tick, time_bonus, reward, trace_file=None):
+        """ Initialize the Agent
+        
+        set its view representation (color, form)
+  
+        :param environment: pointer to the environment where the agent live
+        :param posX: abscissa coordinate of the agent
+        :param posY: ordinate coordinate of the agent
+        :param tick: frequency of decision, the agent only decide after [tick] turn of decision
+        :param time_bonus: a bonus is active for [time_bonus] turn 
+        :param reward: number of bonus which need to be catch to win the game
+        :trace_file: file to write the log information (default = None)
+        """
         Agent.__init__(self, environment, posX, posY, trace_file)
         self.color = 'red'
         self.next_controls = deque([])
@@ -20,6 +38,7 @@ class Avatar(Agent):
         self.reward = reward
 
     def decide(self):
+        """ decision process of the Avatar """
         if self.cpt%self.tick == 0:
             self.cpt = 1
 
@@ -59,4 +78,9 @@ class Avatar(Agent):
         return False
 
     def new_move(self, move):
+        """ function used by the AvatarControl class to send the next direction that the avatar has to follow
+
+        :param move: direction LEFT -> 1, RIGHT -> 2, UP -> 3, DOWN -> 4
+        :type move: int
+        """
         self.next_controls.append(move)
