@@ -6,7 +6,7 @@ from model.avatar.Avatar import Avatar
 from model.avatar.Bonus import Bonus
 from model.avatar.Wall import Wall
 from model.avatar.RandomHunter import RandomHunter
-from model.avatar.PatrolHunter import PatrolHunter
+from model.avatar.BonusHunter import BonusHunter
 from model.avatar.Hunter import Hunter 
 from model.core.SMA import SMA
 from model.avatar.AvatarControls import AvatarControls
@@ -20,6 +20,8 @@ class SMAAvatar(SMA):
         self.bonus_frequency = configAvatar['bonus_frequency']
         self.cpt_bonus = configAvatar['nb_bonus']
         self.gameEnd = False
+        self.speed_hunter = configAvatar['speed_hunters']
+        
 
         if ss:
             self.ss(config, environment, view, configAvatar, trace_file)
@@ -50,10 +52,10 @@ class SMAAvatar(SMA):
             x,y = coord.pop()
             environment.put_agent(RandomHunter(environment, x, y, configAvatar['speed_hunters'], self.trace_file))
 
-        # Placement des PatrolHunters
-        for i in range(configAvatar['nb_patrol_hunters']):
+        # Placement des BonusHunters
+        for i in range(configAvatar['nb_bonus_hunters']):
             x,y = coord.pop()
-            environment.put_agent(PatrolHunter(environment, x, y, configAvatar['speed_hunters'], self.trace_file))
+            environment.put_agent(BonusHunter(environment, x, y, configAvatar['speed_hunters'], self.trace_file))
 
 
 
@@ -63,7 +65,7 @@ class SMAAvatar(SMA):
     """
     def run(self):
 
-
+        # Placer un bonus ou un nouvel BonusHunter
         if ((self.ticks + 1) % self.bonus_frequency) == 0 and self.cpt_bonus != 0:
             coord = [(x,y) for x in range(self.environment.sizeX)
                      for y in range (self.environment.sizeY)]
@@ -71,9 +73,13 @@ class SMAAvatar(SMA):
             x,y = coord.pop()
             while(self.environment.get_agent(x, y) != None):
                 x,y = coord.pop()
-            self.environment.put_agent(Bonus(self.environment, x, y, self.trace_file))
-            self.cpt_bonus -= 1
-        
+
+            if random.choice([True, False]):
+                self.environment.put_agent(Bonus(self.environment, x, y, self.trace_file))
+                self.cpt_bonus -= 1
+            else:
+                self.environment.put_agent(BonusHunter(self.environment, x, y, self.speed_hunter, self.trace_file))
+            
         if self.gameEnd:
             return True 
 

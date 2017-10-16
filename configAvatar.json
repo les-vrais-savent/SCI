@@ -1,11 +1,11 @@
 {
     "nb_hunters": 1,
-    "nb_random_hunters": 5,
-    "nb_patrol_hunters": 1,
-    "speed_hunters": 15,
+    "nb_random_hunters": 3,
+    "nb_bonus_hunters": 0,
+    "speed_hunters": 25,
     "speed_avatar": 10,
     "nb_walls": 400,
-    "time_bonus": 400,
-    "nb_bonus" : 1,
+    "time_bonus": 100,
+    "nb_bonus" : 3,
     "bonus_frequency" : 300
 }

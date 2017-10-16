@@ -24,14 +24,7 @@ class Fish(Animal):
 
     def lay_egg(self, posX, posY):
         """  produce a Fish to the position posX, posY """
-        # """
-        # if self.trace_file != None:
-        #     self.trace_file.write('Fish position : ' + str(self.posX) +
-        #                           ',' + str(self.posY) +
-        #                           ' lay egg at position : ' + str(posX) +
-        #                           ',' + str(posY) + '\n')
-        # """                   
-        return Fish(self.environment, posX, posY, 3, self.trace_file)
+        return Fish(self.environment, posX, posY, self.breedTime, self.trace_file)
 
     def getColor(self):
         """ return the Fish color, depend of turn it was created

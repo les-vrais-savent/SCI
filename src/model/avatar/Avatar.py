@@ -41,7 +41,7 @@ class Avatar(Agent):
             newY = 0
             newX, newY = self.environment.compute_new_position(self.posX, self.posY, x, y)
             if self.environment.is_in(newX, newY) and isinstance(self.environment.get_agent(newX, newY), Bonus):
-                self.environment.reverse_hunter = not self.environment.reverse_hunter
+                self.environment.reverse_hunter = True
                 self.cpt_reverse = self.time_bonus
                 self.environment.move_agent(self, newX, newY)
                 self.point += 1
@@ -53,7 +53,7 @@ class Avatar(Agent):
         self.cpt += 1
         self.cpt_reverse -= 1
         if self.cpt_reverse == 0:
-            self.environment.reverse_hunter = not self.environment.reverse_hunter
+            self.environment.reverse_hunter = False
         if self.point == self.reward:
             return True
         return False

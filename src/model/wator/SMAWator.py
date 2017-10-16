@@ -72,4 +72,4 @@ class SMAWator(SMA):
         SMA.run(self)
         if self.trace_file != None:
             nb_fish, nb_shark = self.count()
-            self.trace_file.write(str(self.ticks) + " " + str(nb_fish) + " " + str(nb_shark) + "\n")
+            self.trace_file.write(str(self.ticks) + " " + str(nb_fish) + " " + str(nb_shark) + " " + str(nb_fish/(nb_shark + 0.001)) + "\n")

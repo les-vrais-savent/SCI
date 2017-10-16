@@ -25,7 +25,7 @@ if args['courbe']:
 else:
     config['view']=True
 
-trace_file = open("../trace.csv", "w+") if config['trace'] else None
+trace_file = open("trace.csv", "w+") if config['trace'] else None
 
 seed = None if config['seed'] == 0 else config['seed']
 random.seed(seed)

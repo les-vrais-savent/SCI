@@ -33,7 +33,7 @@ class Hunter(Agent):
             if move != None:
                 dead_avatar = self.move(move, distance)
                 if self.environment.reverse_hunter:
-                    self.color = 'lemon chiffon'
+                    self.color = 'purple'
                 else:
                     self.color= self.init_color
                 return dead_avatar
